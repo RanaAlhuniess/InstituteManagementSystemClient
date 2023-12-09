@@ -1,25 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { Box, CssBaseline } from "@mui/material";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "./utils/custome-theme";
+import { BrowserRouter as Router } from "react-router-dom";
+import MainRoutes from "./routes/main-routes";
+
+const queryClient = new QueryClient();
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Box sx={{ display: "flex", minHeight: "100dvh" }}>
+        <Router>
+           <MainRoutes />
+         </Router>
+        </Box>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
 
